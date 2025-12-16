@@ -6,6 +6,13 @@ import path from 'path'
 export default defineConfig({
   root: path.resolve(__dirname),
 
+  server: {
+    host: true,
+    allowedHosts: [
+      '.manus.computer'
+    ]
+  },
+
   plugins: [
     react(),
     tailwindcss()
