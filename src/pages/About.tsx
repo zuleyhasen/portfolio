@@ -33,10 +33,15 @@ export default function About() {
                   <SocialLink href="https://www.github.com/zuleyhasen" icon={<Github size={18} />} />
                 </div>
 
-                <button className="w-full py-2 px-4 bg-white/5 hover:bg-white/10 border border-white/10 rounded-lg flex items-center justify-center gap-2 text-sm font-medium transition-colors">
+                <a
+                  href="/zuleyha-sen-cv.pdf"
+                  download
+                  className="w-full py-2 px-4 bg-white/5 hover:bg-white/10 border border-white/10 rounded-lg flex items-center justify-center gap-2 text-sm font-medium transition-colors"
+                >
                   <Download size={16} />
                   Download Resume
-                </button>
+                </a>
+
               </div>
             </div>
           </motion.div>
@@ -124,63 +129,63 @@ export default function About() {
               />
             </div>
 
-        </motion.div>
+          </motion.div>
 
-        {/* Education */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.6 }}
-        >
-          <h3 className="text-xl font-bold mb-6 flex items-center gap-2 text-white">
-            <GraduationCap className="text-secondary" size={24} />
-            Education
-          </h3>
-          <div className="space-y-6">
-            <TimelineItem
-              title="Computer Engineering"
-              org="Yeditepe University"
-              date="2019 - 2024"
-              desc="Bachelor's Degree"
-            />
-            <TimelineItem
-              title="High School"
-              org="Bahçeşehir Atatürk Anadolu Lisesi"
-              date="2015 - 2019"
-              desc="Secondary Education"
-            />
-          </div>
+          {/* Education */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.6 }}
+          >
+            <h3 className="text-xl font-bold mb-6 flex items-center gap-2 text-white">
+              <GraduationCap className="text-secondary" size={24} />
+              Education
+            </h3>
+            <div className="space-y-6">
+              <TimelineItem
+                title="Computer Engineering"
+                org="Yeditepe University"
+                date="2019 - 2024"
+                desc="Bachelor's Degree"
+              />
+              <TimelineItem
+                title="High School"
+                org="Bahçeşehir Atatürk Anadolu Lisesi"
+                date="2015 - 2019"
+                desc="Secondary Education"
+              />
+            </div>
 
-          <h3 className="text-xl font-bold mb-6 mt-10 flex items-center gap-2 text-white">
-            <Award className="text-accent" size={24} />
-            Certifications
-          </h3>
-          <div className="grid grid-cols-2 gap-3">
-            <CertItem title="Geleceği Yazan Kadınlar Yapay Zeka Programı Eğitim Serisi" issuer="Turkcell Geleceği Yazanlar" date="Feb 2025" />
-            <CertItem title="Let's Transform with AI - Participation Certificate" issuer="Kodluyoruz" date="Jan 2025" />
-            <CertItem title="Machine Learning 101" issuer="Turkcell Geleceği Yazanlar" date="Dec 2024" />
-            <CertItem title="Python Programming 101" issuer="Turkcell Geleceği Yazanlar" date="Dec 2024" />
-            <CertItem title="Python Programming 201" issuer="Turkcell Geleceği Yazanlar" date="Dec 2024" />
-            <CertItem title="Python Programming 301" issuer="Turkcell Geleceği Yazanlar" date="Dec 2024" />
-            <CertItem title="Python Programming 401" issuer="Turkcell Geleceği Yazanlar" date="Dec 2024" />
-            <CertItem title="Introduction to Data Science and AI 101" issuer="Turkcell Geleceği Yazanlar" date="Dec 2024" />
-            <CertItem title="Basic Node.js Training" issuer="techcareer.net" date="Nov 2024" />
-            <CertItem title="Summer Project" issuer="Yeditepe University" date="Dec 2023" />
-            <CertItem title="Unity Game Development" issuer="Oyun ve Uygulama Akademisi" date="Aug 2023" />
-            <CertItem title="Technology Entrepreneurship" issuer="Oyun ve Uygulama Akademisi" date="Aug 2023" />
-            <CertItem title="English for Developers" issuer="Oyun ve Uygulama Akademisi" date="Aug 2023" />
-            <CertItem title="Project Execution: Bringing the Project to Life" issuer="Coursera" date="May 2023" />
-            <CertItem title="Project Planning: Bringing It All Together" issuer="Coursera" date="Apr 2023" />
-            <CertItem title="Akbank Python Bootcamp" issuer="Global AI Hub" date="Mar 2023" />
-            <CertItem title="Initiating the Project: Stepping into the Project Successfully" issuer="Coursera" date="Mar 2023" />
-            <CertItem title="Boğaziçi DataCamp 22 Data Science Summit" issuer="Compec - Boğaziçi University Informatics Club" date="Mar 2023" />
-            <CertItem title="Version Controls: Git and GitHub" issuer="BTK Academy" date="May 2023" />
+            <h3 className="text-xl font-bold mb-6 mt-10 flex items-center gap-2 text-white">
+              <Award className="text-accent" size={24} />
+              Certifications
+            </h3>
+            <div className="grid grid-cols-2 gap-3">
+              <CertItem title="Geleceği Yazan Kadınlar Yapay Zeka Programı Eğitim Serisi" issuer="Turkcell Geleceği Yazanlar" date="Feb 2025" />
+              <CertItem title="Let's Transform with AI - Participation Certificate" issuer="Kodluyoruz" date="Jan 2025" />
+              <CertItem title="Machine Learning 101" issuer="Turkcell Geleceği Yazanlar" date="Dec 2024" />
+              <CertItem title="Python Programming 101" issuer="Turkcell Geleceği Yazanlar" date="Dec 2024" />
+              <CertItem title="Python Programming 201" issuer="Turkcell Geleceği Yazanlar" date="Dec 2024" />
+              <CertItem title="Python Programming 301" issuer="Turkcell Geleceği Yazanlar" date="Dec 2024" />
+              <CertItem title="Python Programming 401" issuer="Turkcell Geleceği Yazanlar" date="Dec 2024" />
+              <CertItem title="Introduction to Data Science and AI 101" issuer="Turkcell Geleceği Yazanlar" date="Dec 2024" />
+              <CertItem title="Basic Node.js Training" issuer="techcareer.net" date="Nov 2024" />
+              <CertItem title="Summer Project" issuer="Yeditepe University" date="Dec 2023" />
+              <CertItem title="Unity Game Development" issuer="Oyun ve Uygulama Akademisi" date="Aug 2023" />
+              <CertItem title="Technology Entrepreneurship" issuer="Oyun ve Uygulama Akademisi" date="Aug 2023" />
+              <CertItem title="English for Developers" issuer="Oyun ve Uygulama Akademisi" date="Aug 2023" />
+              <CertItem title="Project Execution: Bringing the Project to Life" issuer="Coursera" date="May 2023" />
+              <CertItem title="Project Planning: Bringing It All Together" issuer="Coursera" date="Apr 2023" />
+              <CertItem title="Akbank Python Bootcamp" issuer="Global AI Hub" date="Mar 2023" />
+              <CertItem title="Initiating the Project: Stepping into the Project Successfully" issuer="Coursera" date="Mar 2023" />
+              <CertItem title="Boğaziçi DataCamp 22 Data Science Summit" issuer="Compec - Boğaziçi University Informatics Club" date="Mar 2023" />
+              <CertItem title="Version Controls: Git and GitHub" issuer="BTK Academy" date="May 2023" />
 
-          </div>
-        </motion.div>
+            </div>
+          </motion.div>
 
+        </div>
       </div>
-    </div>
     </div >
   );
 }
