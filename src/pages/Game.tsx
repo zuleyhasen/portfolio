@@ -178,7 +178,7 @@ export default function Game() {
 
   return (
     <div className="h-full w-full flex flex-col items-center justify-center p-4">
-      <div className="relative w-full max-w-4xl aspect-video bg-black/50 rounded-2xl border border-white/10 overflow-hidden shadow-2xl">
+      <div className="relative w-full max-w-4xl mb-20 aspect-video bg-black/50 rounded-2xl border border-white/10 overflow-hidden shadow-2xl">
         <canvas ref={canvasRef} className="w-full h-full block" />
         
         {/* UI Overlay */}

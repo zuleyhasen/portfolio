@@ -7,7 +7,7 @@ import { Download, Mail, Linkedin, Github, Award, Briefcase, GraduationCap } fro
 export default function About() {
   return (
     <div className="h-full w-full overflow-y-auto p-4 md:p-8 pb-24">
-      <div className="max-w-5xl mx-auto">
+      <div className="max-w-5xl mx-auto mb-20">
 
         {/* Header Section */}
         <div className="flex flex-col md:flex-row gap-8 items-start mb-12">

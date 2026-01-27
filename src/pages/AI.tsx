@@ -77,7 +77,7 @@ export default function AI() {
 
   return (
     <div className="h-full w-full flex items-center justify-center p-4 md:p-8">
-      <div className="w-full max-w-4xl h-[80vh] glass-panel rounded-2xl flex flex-col overflow-hidden shadow-2xl border border-white/10">
+      <div className="w-full max-w-4xl h-[75vh] mb-20 glass-panel rounded-2xl flex flex-col overflow-hidden shadow-2xl border border-white/10">
         
         {/* Header */}
         <div className="p-4 border-b border-white/10 bg-white/5 flex items-center gap-3">
