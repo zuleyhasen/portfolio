@@ -4,18 +4,9 @@ import tailwindcss from '@tailwindcss/vite'
 import path from 'path'
 
 export default defineConfig({
-  root: path.resolve(__dirname),
-
-  server: {
-    host: true,
-    allowedHosts: [
-      '.manus.computer'
-    ]
-  },
-
   plugins: [
     react(),
-    tailwindcss()
+    tailwindcss(),
   ],
 
   resolve: {
@@ -25,7 +16,6 @@ export default defineConfig({
   },
 
   build: {
-    outDir: path.resolve(__dirname, '../dist'),
-    emptyOutDir: true,
+    outDir: 'dist',
   },
 })
