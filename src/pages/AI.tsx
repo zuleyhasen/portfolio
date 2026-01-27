@@ -1,7 +1,12 @@
+'use client';
+
 import React, { useState, useRef, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { Send, Bot, User, Sparkles } from 'lucide-react';
 
+/* =======================
+   TYPES
+======================= */
 interface Message {
   id: number;
   text: string;
@@ -9,173 +14,328 @@ interface Message {
   timestamp: Date;
 }
 
+type Intent =
+  | 'PROFILE'
+  | 'SKILLS'
+  | 'PROJECTS'
+  | 'EXPERIENCE'
+  | 'EDUCATION'
+  | 'CONTACT'
+  | 'HIRING'
+  | 'UNKNOWN';
+
+/* =======================
+   KNOWLEDGE BASE (CV DATA)
+======================= */
 const KNOWLEDGE_BASE = {
-  bio: "Züleyha Şen is a Computer Engineering graduate from Yeditepe University (2024). She is passionate about interactive web systems, game development, and AI integration.",
-  skills: "Her technical skills include React, TypeScript, Node.js, Python, Unity, C#, SQL, and Git. She also has experience with OpenCV and AI algorithms.",
-  projects: "Her key projects include a Hand Rehabilitation Game (Graduation Project), a Library Automation System, and an ERP System Design. She also built a Strategic Move AI Game.",
-  contact: "You can contact her via email at enzuleyha@gmail.com or connect on LinkedIn/GitHub.",
-  default: "I can only answer questions about Züleyha Şen's professional background, skills, and projects. Please ask something related to her work!"
+  profile: {
+    name: 'Züleyha Şen',
+    title: 'Computer Engineer',
+    summary:
+      'Computer Engineering graduate specializing in full-stack development, AI-powered systems, and game-based rehabilitation technologies.',
+  },
+
+  skills: {
+    frontend: ['React', 'TypeScript', 'React Native'],
+    backend: ['.NET MVC', 'Node.js', 'PHP', 'Python'],
+    gameAI: ['Unity', 'C#', 'OpenCV'],
+    systems: ['C', 'SQL Server'],
+  },
+
+  projects: [
+    {
+      name: 'Hand Rehabilitation Game',
+      year: 2024,
+      description:
+        'Camera-based gamified hand rehabilitation system developed using Unity and OpenCV. Published in an academic journal as a graduation project.',
+      tech: ['Unity', 'OpenCV', 'AI', 'Game Design'],
+      highlight: true,
+    },
+    {
+      name: 'Library Automation System',
+      year: 2023,
+      description:
+        'MVC-based library management system with Admin, User, and Staff panels developed during a full-stack internship.',
+      tech: ['.NET MVC', 'SQL Server'],
+    },
+    {
+      name: 'Strategic Move AI Game',
+      year: 2023,
+      description:
+        'AI-powered strategy board game implementing Minimax algorithm with Alpha-Beta Pruning.',
+      tech: ['C', 'AI', 'Algorithms'],
+    },
+    {
+      name: 'Python-to-C Translator',
+      year: 2023,
+      description:
+        'A simple compiler translating a Python-like indentation-based language into C using Lex and Yacc.',
+      tech: ['C', 'Lex', 'Yacc', 'Compiler Design'],
+    },
+  ],
+
+  experience: [
+    {
+      role: 'Operations and Analytics Intern',
+      company: 'Patika.dev',
+      period: 'Apr 2025 – Jul 2025',
+      description:
+        'Tracked student progress, supported technical assessments, and handled operational analytics.',
+    },
+    {
+      role: 'Full Stack Developer Intern',
+      company: 'GNC Proses Otomasyon',
+      period: 'Jun 2023 – Jul 2023',
+      description:
+        'Developed a library automation system using .NET MVC architecture.',
+    },
+  ],
+
+  education: {
+    degree: 'B.Sc. in Computer Engineering',
+    university: 'Yeditepe University',
+    period: '2019 – 2024',
+  },
+
+  contact: {
+    email: 'enzuleyha@gmail.com',
+  },
 };
 
+/* =======================
+   INTENT DETECTION
+======================= */
+function detectIntent(query: string): Intent {
+  const q = query.toLowerCase();
+  if (
+    q.includes('should we hire') ||
+    q.includes('good fit') ||
+    q.includes('hire') ||
+    q.includes('choice')
+  ) {
+    return 'HIRING';
+  }
+
+  // 🔹 ÖNCE spesifikler
+  if (
+    q.includes('project') ||
+    q.includes('projects') ||
+    q.includes('portfolio') ||
+    q.includes('work') ||
+    q.includes('built')
+  ) {
+    return 'PROJECTS';
+  }
+
+  if (q.includes('skill') || q.includes('tech')) {
+    return 'SKILLS';
+  }
+
+  if (q.includes('experience') || q.includes('intern')) {
+    return 'EXPERIENCE';
+  }
+
+  if (q.includes('education') || q.includes('university')) {
+    return 'EDUCATION';
+  }
+
+  if (q.includes('contact') || q.includes('email')) {
+    return 'CONTACT';
+  }
+
+  // 🔹 EN GENEL EN SONA
+  if (q.includes('who') || q.includes('about')) {
+    return 'PROFILE';
+  }
+
+  return 'UNKNOWN';
+}
+
+
+/* =======================
+   RESPONSE GENERATOR
+======================= */
+function generateResponse(query: string): string {
+  const intent = detectIntent(query);
+
+  switch (intent) {
+    case 'PROFILE':
+      return `${KNOWLEDGE_BASE.profile.name} is a ${KNOWLEDGE_BASE.profile.title}. ${KNOWLEDGE_BASE.profile.summary}`;
+
+    case 'SKILLS':
+      return `
+Frontend: ${KNOWLEDGE_BASE.skills.frontend.join(', ')}
+Backend: ${KNOWLEDGE_BASE.skills.backend.join(', ')}
+Game & AI: ${KNOWLEDGE_BASE.skills.gameAI.join(', ')}
+Systems: ${KNOWLEDGE_BASE.skills.systems.join(', ')}
+      `.trim();
+
+    case 'PROJECTS':
+      return KNOWLEDGE_BASE.projects
+        .map(
+          (p) =>
+            `• ${p.name} (${p.year})\n${p.description}\nTech: ${p.tech.join(
+              ', '
+            )}`
+        )
+        .join('\n\n');
+
+    case 'EXPERIENCE':
+      return KNOWLEDGE_BASE.experience
+        .map(
+          (e) =>
+            `${e.role} @ ${e.company} (${e.period})\n${e.description}`
+        )
+        .join('\n\n');
+
+    case 'EDUCATION':
+      return `${KNOWLEDGE_BASE.education.degree}\n${KNOWLEDGE_BASE.education.university} (${KNOWLEDGE_BASE.education.period})`;
+
+    case 'CONTACT':
+      return `You can reach Züleyha via email: ${KNOWLEDGE_BASE.contact.email}`;
+
+    default:
+      return 'I am a portfolio AI assistant. You can ask about projects, skills, education, or professional experience.';
+    case 'HIRING':
+      return `
+Yes — Züleyha Şen would be a very strong hiring choice:))
+She is not only technically capable, but also adaptable, research-oriented, and product-minded. For teams looking for a junior-to-mid level engineer with growth potential and strong fundamentals, hiring her would be a very smart decision:))
+  `.trim();
+
+  }
+
+}
+
+/* =======================
+   MAIN COMPONENT
+======================= */
 export default function AI() {
   const [messages, setMessages] = useState<Message[]>([
     {
       id: 1,
-      text: "Hello! I am Züleyha's AI Assistant. Ask me anything about her projects, skills, or background.",
+      text: "Hello! I'm Züleyha’s AI Assistant. Ask me anything about her CV, projects, or experience.",
       sender: 'ai',
-      timestamp: new Date()
-    }
+      timestamp: new Date(),
+    },
   ]);
+
   const [input, setInput] = useState('');
   const [isTyping, setIsTyping] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
-  const scrollToBottom = () => {
-    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
-  };
+  useEffect(() => {
+    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+  }, [messages]);
 
-  useEffect(scrollToBottom, [messages]);
-
-  const handleSend = async () => {
+  const handleSend = () => {
     if (!input.trim()) return;
 
     const userMessage: Message = {
       id: Date.now(),
       text: input,
       sender: 'user',
-      timestamp: new Date()
+      timestamp: new Date(),
     };
 
-    setMessages(prev => [...prev, userMessage]);
+    setMessages((prev) => [...prev, userMessage]);
     setInput('');
     setIsTyping(true);
 
-    // Simulate AI processing
     setTimeout(() => {
-      const responseText = generateResponse(userMessage.text);
-      const aiMessage: Message = {
-        id: Date.now() + 1,
-        text: responseText,
-        sender: 'ai',
-        timestamp: new Date()
-      };
-      setMessages(prev => [...prev, aiMessage]);
+      const response = generateResponse(userMessage.text);
+      setMessages((prev) => [
+        ...prev,
+        {
+          id: Date.now() + 1,
+          text: response,
+          sender: 'ai',
+          timestamp: new Date(),
+        },
+      ]);
       setIsTyping(false);
-    }, 1500);
-  };
-
-  const generateResponse = (query: string): string => {
-    const lowerQuery = query.toLowerCase();
-    
-    if (lowerQuery.includes('who') || lowerQuery.includes('bio') || lowerQuery.includes('about')) return KNOWLEDGE_BASE.bio;
-    if (lowerQuery.includes('skill') || lowerQuery.includes('stack') || lowerQuery.includes('tech')) return KNOWLEDGE_BASE.skills;
-    if (lowerQuery.includes('project') || lowerQuery.includes('work') || lowerQuery.includes('built')) return KNOWLEDGE_BASE.projects;
-    if (lowerQuery.includes('contact') || lowerQuery.includes('email') || lowerQuery.includes('reach')) return KNOWLEDGE_BASE.contact;
-    
-    return KNOWLEDGE_BASE.default;
+    }, 1200);
   };
 
   return (
-    <div className="h-full w-full flex items-center justify-center p-4 md:p-8">
-      <div className="w-full max-w-4xl h-[75vh] mb-20 glass-panel rounded-2xl flex flex-col overflow-hidden shadow-2xl border border-white/10">
-        
-        {/* Header */}
-        <div className="p-4 border-b border-white/10 bg-white/5 flex items-center gap-3">
-          <div className="p-2 rounded-lg bg-primary/20 text-primary shadow-[0_0_10px_rgba(176,38,255,0.3)]">
-            <Bot size={24} />
-          </div>
+    <div className="h-full w-full flex justify-center p-4">
+      <div className="w-full max-w-4xl h-[70vh] glass-panel rounded-2xl flex flex-col overflow-hidden border border-white/10">
+
+        {/* HEADER */}
+        <div className="p-4 border-b border-white/10 flex items-center gap-3">
+          <Bot className="text-primary" />
           <div>
-            <h2 className="font-bold text-white">AI Assistant</h2>
-            <div className="flex items-center gap-2">
-              <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
-              <span className="text-xs text-muted-foreground font-mono">ONLINE // SYSTEM_READY</span>
-            </div>
+            <h2 className="font-bold">AI Portfolio Assistant</h2>
+            <p className="text-xs opacity-60">ONLINE</p>
           </div>
         </div>
 
-        {/* Chat Area */}
-        <div className="flex-1 overflow-y-auto p-6 space-y-6 bg-black/20">
+        {/* CHAT */}
+        <div className="flex-1 overflow-y-auto p-6 space-y-4">
           {messages.map((msg) => (
             <motion.div
               key={msg.id}
-              initial={{ opacity: 0, y: 10 }}
+              initial={{ opacity: 0, y: 8 }}
               animate={{ opacity: 1, y: 0 }}
-              className={`flex gap-4 ${msg.sender === 'user' ? 'flex-row-reverse' : ''}`}
+              className={`flex gap-3 ${msg.sender === 'user' ? 'flex-row-reverse' : ''
+                }`}
             >
-              <div className={`w-8 h-8 rounded-full flex items-center justify-center shrink-0 ${
-                msg.sender === 'ai' ? 'bg-primary/20 text-primary' : 'bg-white/10 text-white'
-              }`}>
+              <div className="w-8 h-8 flex items-center justify-center rounded-full bg-white/10">
                 {msg.sender === 'ai' ? <Bot size={16} /> : <User size={16} />}
               </div>
-              
-              <div className={`max-w-[80%] p-4 rounded-2xl ${
-                msg.sender === 'ai' 
-                  ? 'bg-white/5 border border-white/10 text-white rounded-tl-none' 
-                  : 'bg-primary text-white rounded-tr-none shadow-[0_0_15px_rgba(176,38,255,0.2)]'
-              }`}>
-                <p className="leading-relaxed">{msg.text}</p>
-                <span className="text-[10px] opacity-50 mt-2 block font-mono">
-                  {msg.timestamp.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
-                </span>
+              <div className="max-w-[80%] p-4 rounded-xl bg-white/5">
+                <p className="text-sm leading-relaxed whitespace-pre-line">
+                  {msg.text}
+                </p>
               </div>
             </motion.div>
           ))}
-          
           {isTyping && (
-            <motion.div 
-              initial={{ opacity: 0 }} 
-              animate={{ opacity: 1 }}
-              className="flex gap-4"
-            >
-              <div className="w-8 h-8 rounded-full bg-primary/20 text-primary flex items-center justify-center">
-                <Bot size={16} />
-              </div>
-              <div className="bg-white/5 border border-white/10 p-4 rounded-2xl rounded-tl-none flex gap-1 items-center">
-                <span className="w-2 h-2 bg-white/50 rounded-full animate-bounce" style={{ animationDelay: '0ms' }} />
-                <span className="w-2 h-2 bg-white/50 rounded-full animate-bounce" style={{ animationDelay: '150ms' }} />
-                <span className="w-2 h-2 bg-white/50 rounded-full animate-bounce" style={{ animationDelay: '300ms' }} />
-              </div>
-            </motion.div>
+            <div className="text-xs opacity-50">AI is typing…</div>
           )}
           <div ref={messagesEndRef} />
         </div>
 
-        {/* Input Area */}
-        <div className="p-4 bg-white/5 border-t border-white/10">
-          <div className="relative flex items-center gap-2">
+        {/* INPUT */}
+        <div className="p-4 border-t border-white/10">
+          <div className="relative">
             <input
-              type="text"
               value={input}
               onChange={(e) => setInput(e.target.value)}
               onKeyDown={(e) => e.key === 'Enter' && handleSend()}
-              placeholder="Ask about projects, skills, or experience..."
-              className="w-full bg-black/30 border border-white/10 rounded-xl px-4 py-3 text-white placeholder:text-white/30 focus:outline-none focus:border-primary/50 focus:ring-1 focus:ring-primary/50 transition-all font-mono text-sm"
+              placeholder="Ask about skills, projects, experience..."
+              className="w-full bg-black/30 border border-white/10 rounded-xl px-4 py-3 text-sm outline-none"
             />
             <button
               onClick={handleSend}
-              disabled={!input.trim() || isTyping}
-              className="absolute right-2 p-2 bg-primary text-white rounded-lg hover:bg-primary/80 disabled:opacity-50 disabled:cursor-not-allowed transition-colors shadow-[0_0_10px_rgba(176,38,255,0.3)]"
+              className="absolute right-2 top-2 p-2 bg-primary rounded-lg"
             >
-              <Send size={18} />
+              <Send size={16} />
             </button>
           </div>
-          <div className="mt-2 flex justify-center gap-4">
-            <SuggestionChip text="What are your skills?" onClick={() => setInput("What are your skills?")} />
-            <SuggestionChip text="Tell me about your projects" onClick={() => setInput("Tell me about your projects")} />
-            <SuggestionChip text="How can I contact you?" onClick={() => setInput("How can I contact you?")} />
+
+          <div className="flex gap-4 mt-4 justify-center text-xs opacity-70">
+            <Suggestion text="What are your skills?" setInput={setInput} />
+            <Suggestion text="Tell me about your projects" setInput={setInput} />
+            <Suggestion text="How can I contact you?" setInput={setInput} />
+            <Suggestion text="Should we hire her?" setInput={setInput} />
           </div>
         </div>
-
       </div>
     </div>
   );
 }
 
-function SuggestionChip({ text, onClick }: { text: string, onClick: () => void }) {
+function Suggestion({
+  text,
+  setInput,
+}: {
+  text: string;
+  setInput: (v: string) => void;
+}) {
   return (
-    <button 
-      onClick={onClick}
-      className="text-xs text-muted-foreground hover:text-primary transition-colors flex items-center gap-1"
+    <button
+      onClick={() => setInput(text)}
+      className="flex items-center gap-1 hover:text-primary"
     >
       <Sparkles size={10} />
       {text}
