@@ -8,7 +8,7 @@ export default function Home() {
     <div className="h-full w-full flex items-center justify-center relative overflow-hidden">
       
       {/* Central Hero Content */}
-      <div className="relative z-10 max-w-4xl w-full px-6 flex flex-col items-center text-center">
+      <div className="relative z-10 max-w-4xl w-full px-6 flex flex-col items-center text-center mb-25">
         
         <motion.div
           initial={{ opacity: 0, y: 20 }}
