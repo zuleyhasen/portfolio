@@ -16,62 +16,72 @@ interface Project {
 const projects: Project[] = [
   {
     id: 1,
+    title: "Corporate Website for Construction Company",
+    description: "A corporate, SEO-optimized website developed for a construction company to present its services, completed projects, and brand identity. The website focuses on performance, responsive design, and search engine visibility to improve the company’s online presence.",
+    technologies: ["React", "TypeScript"],
+    link: null,
+    demo: "/images/ozcelik.webm",
+    image: "/images/ozcelik.webp",
+    category: "Web Development / Frontend Development"
+  },
+    {
+    id: 2,
     title: "Hand Rehabilitation Game",
     description: "Developed an interactive rehabilitation game controlled via hand gestures using a camera-based input system using OpenCV. Published the research findings in the International Journal of Digital Waste Engineering (IJDWE).",
     technologies: ["Python", "Unity", "OpenCV", "Research"],
     link: "https://github.com/zuleyhasen/Hand-Rehabilitation-Game",
-    demo: "/images/hand-rehab-demo.mp4",
-    image: "/images/game.png",
+    demo: "/images/hand-rehab-demo.webm",
+    image: "/images/game.webp",
     category: "OpenAI/Unity"
   },
   {
-    id: 2,
+    id: 3,
     title: "Library Automation System",
     description: "Developed a library management system during an internship using the MVC architecture and .NET technologies, gaining hands-on experience in back-end development and system management.",
     technologies: [".NET", "MVC", "SQL Server"],
     link: null,
     demo: null,
-    image: "/images/gnc-library.png",
+    image: "/images/gnc-library.webp",
     category: "Full Stack"
   },
   {
-    id: 3,
+    id: 4,
     title: "ERP System Design",
     description: "Collaborated with a team to design and develop an ERP application for Senna Design. The system aimed to digitize business processes and enhance operational efficiency.",
     technologies: ["React Native", "PHP", "Android Studio"],
     link: "https://github.com/zuleyhasen/ReactNative-ERP-Mobile-App",
-    demo: "/images/sennaERP.mp4",
-    image: "/images/senna.png",
+    demo: "/images/sennaERP.webm",
+    image: "/images/senna.webp",
     category: "Mobile"
   },
   {
-    id: 4,
+    id: 5,
     title: "Pizza Order System",
     description: "Designed a Pizza Order System using Python as part of Akbank Python Bootcamp, implementing object-oriented principles and decorators.",
     technologies: ["Python", "OOP"],
     link: "https://github.com/zuleyhasen/PizzaOrderSystem",
     demo: null,
-    image: "/images/pizza.png",
+    image: "/images/pizza.webp",
     category: "Backend"
   },
   {
-    id: 5,
+    id: 6,
     title: "Strategic Move AI Game",
     description: "AI-powered strategy board game developed in C. The computer's decisions are guided by the Minimax algorithm with Alpha-Beta Pruning.",
     technologies: ["C", "AI", "Algorithms"],
     link: "https://github.com/zuleyhasen/Strategic-Move-AI-Game",
     demo: null,
-    image: "/images/searching.png",
+    image: "/images/searching.webp",
     category: "AI"
   },
   {
-    id: 6,
+    id: 7,
     title: "Python-to-C Translator",
     description: "A simple compiler that translates a Python-like indentation-based language into C code using Lex and Yacc.",
     technologies: ["Lex", "Yacc", "C"],
     link: "https://github.com/zuleyhasen/python_to_c_compiler",
     demo: null,
-    image: "/images/Generated.png",
+    image: "/images/Generated.webp",
     category: "System"
   }
 ];
