@@ -20,7 +20,7 @@ export default function About() {
               <div className="absolute -inset-1 bg-gradient-to-r from-primary to-secondary rounded-2xl blur opacity-25 group-hover:opacity-50 transition duration-1000"></div>
               <div className="relative glass-panel p-6 rounded-2xl flex flex-col items-center text-center">
                 <img
-                  src="/images/me.webm"
+                  src="/images/me.webp"
                   alt="Züleyha Şen"
                   className="w-32 h-32 rounded-full object-cover border-2 border-white/10 mb-4 shadow-lg"
                 />
