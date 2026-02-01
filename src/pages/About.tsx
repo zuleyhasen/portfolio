@@ -108,6 +108,12 @@ export default function About() {
 
             <div className="space-y-6">
               <TimelineItem
+                title="Corporate Website for Construction Company"
+                org="React · TypeScript"
+                date="2026"
+                desc="A corporate, SEO-optimized website developed for a construction company to present its services, completed projects, and brand identity. The website focuses on performance, responsive design, and search engine visibility to improve the company’s online presence."
+              />
+              <TimelineItem
                 title="Hand Rehabilitation Game (Graduation Project)"
                 org="Unity · OpenAI · Academic Publication"
                 date="2024"
