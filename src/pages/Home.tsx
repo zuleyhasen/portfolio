@@ -18,7 +18,7 @@ export default function Home() {
         >
           <div className="absolute -inset-10 bg-primary/20 blur-3xl rounded-full opacity-50 animate-pulse" />
           <img 
-            src="/images/me.webp" 
+            src="/me.webp" 
             alt="Züleyha Şen" 
             className="w-32 h-32 md:w-40 md:h-40 rounded-full object-cover border-2 border-white/20 shadow-[0_0_30px_rgba(176,38,255,0.3)] relative z-10"
           />
