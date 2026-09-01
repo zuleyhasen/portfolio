@@ -34,7 +34,7 @@ export default function About() {
                 </div>
 
                 <a
-                  href="/zuleyha-sen-cv.pdf"
+                  href="/zuleyha_sen_resume.pdf"
                   download
                   className="w-full py-2 px-4 bg-white/5 hover:bg-white/10 border border-white/10 rounded-lg flex items-center justify-center gap-2 text-sm font-medium transition-colors"
                 >
